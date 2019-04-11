@@ -1,12 +1,14 @@
-package pl.javastart.restoffers;
+package pl.javastart.restoffers.offer;
 
 
-import com.sun.javafx.beans.IDProperty;
+
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import pl.javastart.restoffers.category.Category;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 @EntityScan
@@ -20,6 +22,9 @@ public class Offer {
     private String imgUrl;
     private BigDecimal price;
     //BigDecimal a = new BigDecimal("9.5");
+    @ManyToOne
+    private Category category;
+
 
     public Long getId() {
         return id;

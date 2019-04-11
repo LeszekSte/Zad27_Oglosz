@@ -1,4 +1,4 @@
-package pl.javastart.restoffers;
+package pl.javastart.restoffers.category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

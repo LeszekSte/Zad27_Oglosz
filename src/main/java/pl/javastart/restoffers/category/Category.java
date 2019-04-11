@@ -1,10 +1,10 @@
-package pl.javastart.restoffers;
+package pl.javastart.restoffers.category;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import pl.javastart.restoffers.offer.Offer;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -14,6 +14,19 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
+    private  String description;
+
+    @OneToMany(mappedBy = "category")
+    private List<Offer>  offers;
+
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
 
     public Long getId() {
         return Id;
@@ -39,7 +52,7 @@ public class Category {
         this.description = description;
     }
 
-    private  String description;
+
 
 
 }
