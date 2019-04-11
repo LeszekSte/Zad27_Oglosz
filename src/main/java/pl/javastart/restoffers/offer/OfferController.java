@@ -29,10 +29,6 @@ public class OfferController {
         return offers.size();
     }
 
-
-
-
-
     @GetMapping("/{id}")
     public Offer getOne(@PathVariable Long id) {
         Optional<Offer> optionalOffer = offerRepository.findById(id);
@@ -55,9 +51,7 @@ public class OfferController {
         }
         Offer saveOffer = offerRepository.save(offer);
         return ResponseEntity.ok(saveOffer);
-
     }
-
 
 }
 
