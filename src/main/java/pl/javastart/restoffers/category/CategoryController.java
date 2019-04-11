@@ -1,8 +1,7 @@
 package pl.javastart.restoffers.category;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -10,16 +9,35 @@ import java.util.List;
 @RequestMapping("/api/category")
 public class CategoryController {
 
+    private CategoryRepository categoryRepository;
+
     public CategoryController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
-    private CategoryRepository categoryRepository;
+
 
 
     @GetMapping("")
     public List<Category> getAllCategory (){
         return  categoryRepository.findAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id){
+        categoryRepository.existsById(id);
+
+    }
+
+
+    @PostMapping("")
+    public ResponseEntity<Category> insert(@RequestBody Category category) {
+
+        if(category.getId() != null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Category saveCategory = categoryRepository.save(category);
+        return ResponseEntity.ok(saveCategory);
     }
 
 

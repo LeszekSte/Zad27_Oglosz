@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 public class Category {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -19,14 +18,6 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Offer>  offers;
 
-
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
-    }
 
     public Long getId() {
         return Id;
@@ -52,7 +43,11 @@ public class Category {
         this.description = description;
     }
 
+    public List<Offer> getOffers() {
+        return offers;
+    }
 
-
-
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
 }

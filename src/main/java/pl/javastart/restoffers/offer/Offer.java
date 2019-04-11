@@ -21,7 +21,7 @@ public class Offer {
     private String description;
     private String imgUrl;
     private BigDecimal price;
-    //BigDecimal a = new BigDecimal("9.5");
+
     @ManyToOne
     private Category category;
 
@@ -42,6 +42,14 @@ public class Offer {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
@@ -58,7 +66,11 @@ public class Offer {
         this.price = price;
     }
 
+    public Category getCategory() {
+        return category;
+    }
 
-
-
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

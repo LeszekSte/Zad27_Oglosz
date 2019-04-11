@@ -7,4 +7,3 @@ INSERT INTO category (name,description) VALUES
 ('Elektronika','komptery i reszta'),
 ('Meble','Stały różnego rodzaju'),
 
-
