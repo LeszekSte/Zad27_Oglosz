@@ -1,30 +1,26 @@
-package pl.javastart.restoffers.offer;
+package pl.javastart.restoffers.model;
 
 
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import pl.javastart.restoffers.category.Category;
+import pl.javastart.restoffers.model.Category;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@EntityScan
+@Entity
 public class Offer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
     private String description;
     private String imgUrl;
     private BigDecimal price;
-
     @ManyToOne
     private Category category;
-
 
     public Long getId() {
         return id;

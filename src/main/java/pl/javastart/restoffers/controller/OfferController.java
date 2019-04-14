@@ -1,9 +1,10 @@
-package pl.javastart.restoffers.offer;
+package pl.javastart.restoffers.controller;
 
 
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.javastart.restoffers.model.Offer;
+import pl.javastart.restoffers.repository.OfferRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +19,14 @@ public class OfferController {
         this.offerRepository = offerRepository;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Offer> getAllOffret() {
         return offerRepository.findAll();
     }
 
     @GetMapping("/count")
     public int countOffer() {
-        List<Offer> offers= offerRepository.findAll();
+        List<Offer> offers = offerRepository.findAll();
         return offers.size();
     }
 
@@ -40,19 +41,21 @@ public class OfferController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOffer (@PathVariable Long id){
-        offerRepository.deleteById(id);
+    public void deleteOffer(@PathVariable Long id) {
+        Optional<Offer> offerOptional = offerRepository.findById(id);
+        if (offerOptional.isPresent()) {
+            offerRepository.deleteById(id);
+        }
     }
 
-    @PostMapping("")
-    public ResponseEntity<Offer> insert (@RequestBody Offer offer){
-        if (offer.getId()!=null) {
-         return ResponseEntity.badRequest().build();
+    @PostMapping("/")
+    public ResponseEntity<Offer> insert(@RequestBody Offer offer) {
+        if (offer.getId() != null) {
+            return ResponseEntity.badRequest().build();
         }
         Offer saveOffer = offerRepository.save(offer);
         return ResponseEntity.ok(saveOffer);
     }
-
 }
 
 

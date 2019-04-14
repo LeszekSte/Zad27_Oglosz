@@ -1,9 +1,13 @@
-package pl.javastart.restoffers.category;
+package pl.javastart.restoffers.controller;
 
+import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.javastart.restoffers.repository.CategoryRepository;
+import pl.javastart.restoffers.model.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/category")
@@ -15,22 +19,21 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-
-
-
-    @GetMapping("")
+    @GetMapping("/")
     public List<Category> getAllCategory (){
         return  categoryRepository.findAll();
     }
 
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id){
-        categoryRepository.existsById(id);
-
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+            if(categoryOptional.isPresent()) {
+                categoryRepository.existsById(id);
+            }
     }
 
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Category> insert(@RequestBody Category category) {
 
         if(category.getId() != null) {
@@ -39,9 +42,4 @@ public class CategoryController {
         Category saveCategory = categoryRepository.save(category);
         return ResponseEntity.ok(saveCategory);
     }
-
-//        @PostMapping("/name")
-//        public List<>
-
-
 }

@@ -1,23 +1,29 @@
-package pl.javastart.restoffers.category;
+package pl.javastart.restoffers.model;
 
 
-import pl.javastart.restoffers.offer.Offer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+//import jdk.jfr.DataAmount;
 
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
 public class Category {
+
+    //lombok
+    // BeanUtils.coptproperties(offer
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String name;
+    private String title;
+    @Column(name = "ds_cat")
     private  String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany
+    @JoinColumn(name = "category_id")
     private List<Offer>  offers;
-
 
     public Long getId() {
         return Id;
@@ -27,12 +33,12 @@ public class Category {
         Id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
